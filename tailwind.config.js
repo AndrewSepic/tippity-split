@@ -9,7 +9,8 @@ module.exports = {
         midgreen: '#1E5959',
         lightgreen: '#3B8C6E',
         cashgreen: '#89D99D',
-        inputbg: '#a8c8c5',
+        inputbg: '#24506c',
+        inputborderbottom: '#118593',
       }
     },
   },

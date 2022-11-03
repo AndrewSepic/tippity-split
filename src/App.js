@@ -2,6 +2,7 @@ import './App.css';
 import Nav from './components/Nav';
 import ContentLayout from './components/ContentLayout';
 import EmployeeListing from './components/EmployeeListing';
+import SessionWrapper from './components/SessionWrapper';
 
 function App() {
 
@@ -10,6 +11,8 @@ function App() {
       <Nav></Nav>
 
       <ContentLayout>
+
+        <SessionWrapper/>
 
         <EmployeeListing/>
 
