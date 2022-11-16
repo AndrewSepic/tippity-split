@@ -4,8 +4,8 @@ import { supabase } from './../client';
 const EmployeeListing = ({ }) => {
 
     const [employees, setEmployees] = useState([]);
-    const [employee, setEmployee] = useState({employee_name: "", Hours: "", Tips: ""});
-    const { employee_name, hours, tips } = employee;
+    const [employee, setEmployee] = useState({employee_name: ""});
+    const { employee_name } = employee;
 
 
     async function fetchEmployees() {
@@ -13,7 +13,7 @@ const EmployeeListing = ({ }) => {
           .from('employees')
           .select()
           setEmployees(data)
-          console.log("data: ", data);
+          // console.log("data: ", data);
       }
 
     async function createEmployee() {
