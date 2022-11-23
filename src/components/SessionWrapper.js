@@ -12,7 +12,42 @@ const SessionWrapper = ({}) => {
         .from('sessions')
         .insert({ session_name, session_total_tips })
         setSession({session_name: "", session_total_tips: ""})
+        processEmployeeData()
     }
+
+    async function processEmployeeData() {
+      console.log('get this data and pass it to Supabase')
+  
+          // 3. Send a request to our API with the user's email address.
+          const res = await fetch("/api/process_session", {
+            body: JSON.stringify({
+              first: "this will",
+              second: "hopefully work",
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+            method: "POST",
+          });
+      
+          const { error } = await res.json();
+      
+          if (error) {
+            // 4. If there was an error, update the message in state.
+            //clearFields();
+            return;
+          }
+      
+          try {
+            //postCommentEvent();
+          } catch (e) {
+            console.log(e);
+          }
+      
+          // setShow(true);
+          //clearFields();
+  }
+
 
     return(
         <div className="w-1/2 flex flex-col justify-between">
