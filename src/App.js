@@ -1,7 +1,6 @@
 import './App.css';
 import Nav from './components/Nav';
 import ContentLayout from './components/ContentLayout';
-import EmployeeListing from './components/EmployeeListing';
 import SessionWrapper from './components/SessionWrapper';
 import { useState, useEffect } from 'react';
 
@@ -19,10 +18,6 @@ function App() {
     setResponse(body);
   };
 
-  callBackendAPI();
-  console.log(response);
-  debugger;
-
   return (
     <div>
       <Nav></Nav>
@@ -30,9 +25,6 @@ function App() {
       <ContentLayout>
 
         <SessionWrapper/>
-
-        <EmployeeListing/>
-
 
       </ContentLayout>
 

@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import { supabase } from './../client';
 
-const EmployeeListing = ({ }) => {
+const EmployeeListing = ({inputHandler, tips}) => {
 
     const [employees, setEmployees] = useState([]);
     const [employee, setEmployee] = useState({employee_name: ""});
     const { employee_name } = employee;
-
 
     async function fetchEmployees() {
         const { data } = await supabase
@@ -35,6 +34,11 @@ const EmployeeListing = ({ }) => {
           <h2 className="text-white py-2 text-xl font-bold border-b-2 border-[#24506c] mb-8">Staff</h2>
 
           <div className="employee-listing">
+            <div className="employee my-2 flex justify-start">
+              <h3 className="text-[#588bac] border-[#24506c] border-b-2 py-2 w-[120px] font-bold">Name</h3>
+              <h3 className="text-[#588bac] border-[#24506c] border-b-2 py-2 w-[120px] font-bold">Hours</h3>
+              <h3 className="text-[#588bac] border-[#24506c] border-b-2 py-2 w-[120px] font-bold">Tips</h3>
+            </div>
           {
               employees.map(employee => (
                 <div key={employee.id} className="employee my-2 flex justify-start">
@@ -49,7 +53,7 @@ const EmployeeListing = ({ }) => {
           <div className="addEmployee mt-12">
                 <input className="bg-inputbg mr-4 text-white font-bold p-2 placeholder-darkgreen border-emerald-300 border-b-2 focus:outline-none focus:ring focus:ring-emerald-300/75" placeholder="New Employee" value={employee_name} onChange={e => setEmployee({ ...employee, employee_name: e.target.value })} />
 
-                <button className="bg-[#118593] py-2 px-4 text-white font-bold uppercase" onClick={createEmployee}>Add Employee</button>
+                <button className="bg-[#118593] py-2 px-4 text-white font-bold uppercase transition-all duration-300 hover:bg-[#176f79]" onClick={createEmployee}>Add Employee</button>
           </div>   
     </div>
     )

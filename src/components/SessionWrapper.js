@@ -1,78 +1,55 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '.././client';
+import EmployeeListing from './EmployeeListing';
+import SessionInfo  from './SessionInfo';
+
 
 const SessionWrapper = ({}) => {
 
-    const [session, setSession] = useState({session_name: "", session_total_tips: ""});
-    const {session_name, session_total_tips} = session;
-  
-    async function saveSession() {
-      console.log('clicked save')
-      await supabase
-        .from('sessions')
-        .insert({ session_name, session_total_tips })
-        setSession({session_name: "", session_total_tips: ""})
-        processEmployeeData()
-    }
+  const [session, setSession] = useState({session_name: "", session_total_tips: ""});
+  const {session_name, session_total_tips} = session;
 
-    async function processEmployeeData() {
-      console.log('get this data and pass it to Supabase')
-  
-          // 3. Send a request to our API with the user's email address.
-          const res = await fetch("/api/process_session", {
-            body: JSON.stringify({
-              first: "this will",
-              second: "hopefully work",
-            }),
-            headers: {
-              "Content-Type": "application/json",
-            },
-            method: "POST",
-          });
-      
-          const { error } = await res.json();
-      
-          if (error) {
-            // 4. If there was an error, update the message in state.
-            //clearFields();
-            return;
-          }
-      
-          try {
-            //postCommentEvent();
-          } catch (e) {
-            console.log(e);
-          }
-      
-          // setShow(true);
-          //clearFields();
+  const [employeeInfo, setEmployeeInfo] = useState([]);
+  const {employee_name, employee_hours, employee_tips} = employeeInfo;
+
+  const updateSession = (sessionInfo) => {
+    setSession(sessionInfo)
+    // console.log(session);
+  }
+
+  const updateEmployeeSessionInfo = (employeeSessionInfo) => {
+    setEmployeeInfo(employeeSessionInfo)
+    console.log(employeeInfo)
+  }
+
+  async function saveSession() {
+    console.log('clicked save')
+    await supabase
+      .from('sessions')
+      .insert({ session_name, session_total_tips })
+      setSession({session_name: "", session_total_tips: ""})
+      //processEmployeeData()
   }
 
 
-    return(
-        <div className="w-1/2 flex flex-col justify-between">
+    return (
+      <div className="w-full">
 
-            <div className="block">
-                <h2 className="text-white py-2 text-xl font-bold">Session Name</h2>
-                <input size="50" className="bg-inputbg mr-4 text-white font-bold p-2 placeholder-darkgreen border-emerald-300 border-b-2 focus:outline-none focus:ring focus:ring-emerald-300/75" placeholder="Put a name or Pay period here" value={session_name} onChange={e => setSession({ ... session, session_name: e.target.value})}></input>
-            </div>
+        <div className="flex justify-between">
+        
+          <SessionInfo inputHandler={updateSession} sessionInfo={session} />
 
-            <div className="block">
-                <h2 className="text-white py-2 text-xl font-bold">Total Tips</h2>
-                <span className="text-white py-2 text-xl font-bold">
-                    $ <input size="6" className="bg-inputbg mr-4 text-white font-bold p-2 placeholder-darkgreen border-emerald-300 border-b-2 focus:outline-none focus:ring focus:ring-emerald-300/75" placeholder="0.00" value={session_total_tips} onChange={e => setSession({ ... session, session_total_tips: e.target.value})}></input>
-                </span>
-            </div>
+          <EmployeeListing inputHandler={updateEmployeeSessionInfo} tips={session_total_tips}/>
 
-            <div className="block">
-                <button className="bg-[#118593] py-2 px-4 text-white font-bold uppercase" onClick={saveSession}>Save Session</button>
-                {
-                //console.log(session)
-                }
-            </div>
-            
         </div>
-       
+
+        <div className="block w-full my-12 border-inputbg border-t-2 pt-6">
+            <button className="bg-[#118593] py-2 px-8 text-white font-bold uppercase transition-all duration-300 hover:bg-[#176f79]
+" onClick={saveSession}>Save Session</button>
+        </div>
+
+      </div>
+
     )
 }
 
