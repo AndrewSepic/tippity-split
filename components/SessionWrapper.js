@@ -31,16 +31,15 @@ const SessionWrapper = ({}) => {
       processEmployeeData([12,15,22])
   }
 
-    async function processEmployeeData(employeeInfo) {
+    async function processEmployeeData(employeeData) {
       // 3. Send a request to our API with the employee info
-      const res = await fetch("/api", {
-        body: JSON.stringify({employeeInfo
-        }),
+      const res = await fetch('/api/session-data', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-        method: "POST",
-      });
+        body: JSON.stringify(employeeData),
+      })
 
       const { error } = await res.json();
 
