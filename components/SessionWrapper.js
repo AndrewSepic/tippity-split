@@ -28,8 +28,36 @@ const SessionWrapper = ({}) => {
       .from('sessions')
       .insert({ session_name, session_total_tips })
       setSession({session_name: "", session_total_tips: ""})
-      //processEmployeeData()
+      processEmployeeData([12,15,22])
   }
+
+    async function processEmployeeData(employeeInfo) {
+      // 3. Send a request to our API with the employee info
+      const res = await fetch("/api", {
+        body: JSON.stringify({employeeInfo
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      });
+
+      const { error } = await res.json();
+
+      if (error) {
+        // 4. If there was an error, update the message in state.
+        console.log(error);
+        return;
+      }
+
+      try {
+        // Do Something
+        console.log(res.json)
+      } catch (e) {
+        console.log(e);
+      }
+
+  };
 
 
     return (
