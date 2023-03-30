@@ -19,7 +19,7 @@ const SessionWrapper = ({}) => {
 
   const updateEmployeeSessionInfo = (employeeSessionInfo) => {
     setEmployeeInfo(employeeSessionInfo)
-    console.log(employeeInfo)
+    console.log("Employee info", employeeInfo)
   }
 
   async function saveSession() {
