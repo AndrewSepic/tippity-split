@@ -7,14 +7,14 @@ import SessionInfo  from './SessionInfo';
 const SessionWrapper = ({}) => {
 
   const [session, setSession] = useState({session_name: "", session_total_tips: ""});
-  const {session_name, session_total_tips} = session;
 
   const [employeeInfo, setEmployeeInfo] = useState([]);
   const {employee_name, employee_hours, employee_tips} = employeeInfo;
 
   const updateSession = (sessionInfo) => {
     setSession(sessionInfo)
-    // console.log(session);
+    // console.log("This is the session", session);
+	// console.log(session.session_total_tips)
   }
 
   const updateEmployeeSessionInfo = (employeeSessionInfo) => {
@@ -66,7 +66,7 @@ const SessionWrapper = ({}) => {
         
           <SessionInfo inputHandler={updateSession} sessionInfo={session} />
 
-          <EmployeeListing inputHandler={updateEmployeeSessionInfo} tips={session_total_tips}/>
+          <EmployeeListing inputHandler={updateEmployeeSessionInfo} totalTips={session.session_total_tips}/>
 
         </div>
 

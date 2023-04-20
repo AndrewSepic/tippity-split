@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 //import { fetchEmployees, createEmployee } from '../functions/EmployeeFunctions.js'
 import { supabase } from '../src/client';
 
-const EmployeeListing = ({inputHandler, tips}) => {
+const EmployeeListing = ({inputHandler, totalTips}) => {
 
     // Array of Employees from Supabase
     const [employees, setEmployees] = useState([])
@@ -14,13 +14,21 @@ const EmployeeListing = ({inputHandler, tips}) => {
     const [totalHours, setTotalHours] = useState(0)
     const [employeeSessionData, setEmployeeSessionData] = useState([''])
 
-    const calculateTips = (employeeHours, employeeId) => {
-      setTotalHours(totalHours => employeeHours + totalHours)
-      // tips * employeeHours / totalHours
-      const employeeTips = (tips * employeeHours / totalHours).toFixed(2)
-      const index = employeeSessionData.findIndex((i => i.id == employeeId))
-      employeeSessionData[index].tips = employeeTips
-      setEmployeeSessionData(employeeSessionData)
+    const updateTotalHours = (employeeHours, employeeId) => {
+      let index = employeeSessionData.findIndex((i => i.id == employeeId))
+      employeeSessionData[index].hours = employeeHours
+      const reducedEmployeeHours = employeeSessionData.reduce(
+        (accumulator, currentValue) => accumulator + currentValue.hours, 0)
+      console.log("total hours", reducedEmployeeHours)
+      setTotalHours(reducedEmployeeHours)
+    }
+
+    const calculateTips = (employeeId) => {
+		console.log(typeof totalTips)
+		console.log("total Tips is", totalTips)
+		let index = employeeSessionData.findIndex((i => i.id == employeeId))
+		employeeSessionData[index].tips = ((totalTips * employeeSessionData[index].hours) / totalHours).toFixed(2)
+      	setEmployeeSessionData(employeeSessionData)
     }
 
     async function logEmployeeData() {
@@ -32,6 +40,11 @@ const EmployeeListing = ({inputHandler, tips}) => {
       fetchEmployees()
     },[])
 
+    // Calculate Tips as Employee Hours are updated 
+    // useEffect(() => {
+    //   calculateTips()
+    // },[totalHours])
+
     async function fetchEmployees() {
       console.log('fetchemployees runs')
       const { data } = await supabase
@@ -40,7 +53,7 @@ const EmployeeListing = ({inputHandler, tips}) => {
         .eq('is_active', true) 
         setEmployees(data)
         const newData = streamLinedData(data)
-        setEmployeeSessionData(newData)  
+        setEmployeeSessionData(newData)
     }
 
     // Implicit return using parentheses
@@ -71,7 +84,7 @@ const EmployeeListing = ({inputHandler, tips}) => {
         <div className="w-1/2">
 
           <div className="text-white py-2 text-xl">{totalHours}</div>
-          <div className="text-white py-2 text-xl"></div>
+          <div className="text-white py-2 text-xl">{totalTips}</div>
 
           <h2 className="text-white py-2 text-xl font-bold border-b-2 border-[#24506c] mb-8">Staff</h2>
 
@@ -86,8 +99,8 @@ const EmployeeListing = ({inputHandler, tips}) => {
                 <h3 className="text-white py-2 w-[120px] font-bold">{employee.employee_name}</h3>
                 <input size="6" className="bg-inputbg mr-4 text-white font-bold p-2 placeholder-darkgreen border-emerald-300 border-b-2 focus:outline-none focus:ring focus:ring-emerald-300/75" 
                   placeholder="Hours" onChange={e => {
-                    //inputHandler({ ... employee, hours: e.target.value})
-                    calculateTips(parseFloat(e.target.value), employee.id)
+                    updateTotalHours(parseFloat(e.target.value), employee.id)
+					calculateTips(employee.id)
                   }}/>
                 <div className="w-[100px] text-white text-right px-2 placeholder-white  border-emerald-300 border-b-2 pt-2">${employeeSessionData[index].tips}</div>
               </div>
