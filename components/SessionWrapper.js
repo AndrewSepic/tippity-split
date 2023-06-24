@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../src/client';
-import EmployeeListing from './EmployeeListing';
+import EmployeeWrapper from './EmployeeWrapper';
 import SessionInfo  from './SessionInfo';
 
 
@@ -13,8 +13,6 @@ const SessionWrapper = ({}) => {
 
   const updateSession = (sessionInfo) => {
     setSession(sessionInfo)
-    // console.log("This is the session", session);
-	// console.log(session.session_total_tips)
   }
 
   const updateEmployeeSessionInfo = (employeeSessionInfo) => {
@@ -66,7 +64,7 @@ const SessionWrapper = ({}) => {
         
           <SessionInfo inputHandler={updateSession} sessionInfo={session} />
 
-          <EmployeeListing inputHandler={updateEmployeeSessionInfo} totalTips={session.session_total_tips}/>
+          <EmployeeWrapper inputHandler={updateEmployeeSessionInfo} totalTips={session.session_total_tips}/>
 
         </div>
 
