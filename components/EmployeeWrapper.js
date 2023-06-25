@@ -11,29 +11,24 @@ const EmployeeWrapper = ({inputHandler, totalTips}) => {
     const { employee_name } = employee
 
     // Session Info
-    const [totalHours, setTotalHours] = useState(0)
-    const [employeeSessionData, setEmployeeSessionData] = useState([''])
+    const [employeeSessionData, setEmployeeSessionData] = useState({totalHours: 0, employeeData: null})
+    const handleOnChange = (employeeHours, employeeId) => {
+		let tempEmployeeData = {...employeeSessionData}
+      	let index = tempEmployeeData.employeeData.findIndex((i => i.id == employeeId))
+      	tempEmployeeData.employeeData[index].hours = employeeHours
+      	const totalHours = tempEmployeeData.employeeData.reduce(
+        	(accumulator, currentValue) => accumulator + currentValue.hours, 0)
 
-    const updateTotalHours = (employeeHours, employeeId) => {
-      let index = employeeSessionData.findIndex((i => i.id == employeeId))
-	  let tempEmployeeData = employeeSessionData
-      tempEmployeeData[index].hours = employeeHours
-	  setEmployeeSessionData(tempEmployeeData)
-
-      const reducedEmployeeHours = employeeSessionData.reduce(
-        (accumulator, currentValue) => accumulator + currentValue.hours, 0)
-      setTotalHours(reducedEmployeeHours)
-    }
-
-    const calculateTips = () => {
-		console.log("total Tips is", totalTips)
-		const tempEmployeeData = employeeSessionData
 		if(totalTips) {
-			tempEmployeeData.forEach( employee => {
+			tempEmployeeData.employeeData.forEach( employee => {
 				employee.tips = ((totalTips * employee.hours)/ totalHours).toFixed(2)
 			})
-			setEmployeeSessionData(tempEmployeeData)
 		}
+      	
+		setEmployeeSessionData({
+			totalHours: totalHours,
+			employeeData: tempEmployeeData.employeeData
+		})
     }
 
     async function logEmployeeData() {
@@ -45,17 +40,6 @@ const EmployeeWrapper = ({inputHandler, totalTips}) => {
       fetchEmployees()
     },[])
 
-    // Calculate Tips as Employee Hours are updated 
-    useEffect(() => {
-	  console.log("total hours are", totalHours)
-	  calculateTips()
-    },[totalHours])
-
-	// Testing when setEmployeeSesssionData Changes
-	useEffect(() => {
-		console.log("Employee session data was updated")
-	},[employeeSessionData])
-
     async function fetchEmployees() {
       console.log('fetchemployees runs')
       const { data } = await supabase
@@ -63,7 +47,7 @@ const EmployeeWrapper = ({inputHandler, totalTips}) => {
         .select()
         .eq('is_active', true) 
         const newData = streamLinedData(data)
-        setEmployeeSessionData(newData)
+        setEmployeeSessionData({...employeeSessionData, employeeData: newData})
     }
 
     // Implicit return using parentheses
@@ -102,7 +86,7 @@ const EmployeeWrapper = ({inputHandler, totalTips}) => {
               <h3 className="text-[#588bac] border-[#24506c] border-b-2 py-2 w-[120px] font-bold">Tips</h3>
             </div>
             
-			<EmployeeListing employeeData={employeeSessionData} handleOnChange={updateTotalHours}/>
+			<EmployeeListing employeeData={employeeSessionData.employeeData} handleOnChange={handleOnChange}/>
            
           </div>
 
