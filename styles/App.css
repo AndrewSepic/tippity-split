@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.employee h3, h4 {
+.employee h3,
+h4 {
   display: inline;
 }
