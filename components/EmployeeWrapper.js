@@ -4,7 +4,6 @@ import { supabase } from "../src/client";
 import EmployeeListing from "./EmployeeListing";
 
 const EmployeeWrapper = ({ inputHandler, totalTips }) => {
-  console.log("employeeWrapper renders");
 
   // Single Employee to add to / remove from Supabase
   const [employee, setEmployee] = useState({ employee_name: "" });
@@ -48,7 +47,6 @@ const EmployeeWrapper = ({ inputHandler, totalTips }) => {
   }, []);
 
   async function fetchEmployees() {
-    console.log("fetchemployees runs");
     const { data } = await supabase
       .from("employees")
       .select()

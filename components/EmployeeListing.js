@@ -1,6 +1,4 @@
 const EmployeeListing = ({ employeeData, handleOnChange }) => {
-  console.log("employeeListing renders");
-  console.log("employeeData is", employeeData);
 
   if (employeeData) {
     return (

@@ -18,14 +18,13 @@ const SessionWrapper = ({}) => {
 
   const updateEmployeeSessionInfo = (employeeSessionInfo) => {
     setEmployeeInfo(employeeSessionInfo);
-    console.log("Employee info", employeeInfo);
+    // console.log("Employee info", employeeInfo);
   };
 
   async function saveSession() {
-    console.log("clicked save");
     await supabase
       .from("sessions")
-      .insert({ session_name, session_total_tips });
+      .insert({ session_name: session.session_name, session_total_tips: session.session_total_tips })
     setSession({ session_name: "", session_total_tips: "" });
     processEmployeeData([12, 15, 22]);
   }
