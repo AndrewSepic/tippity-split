@@ -6,3 +6,15 @@
 h4 {
   display: inline;
 }
+
+.deleteEmployee {
+	transition: all ease-in-out .2s;
+	color: white;
+	opacity: .25;
+	cursor: pointer;
+}
+
+.deleteEmployee:hover {
+	color: red;
+	opacity: 1;
+}

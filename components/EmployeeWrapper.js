@@ -1,19 +1,19 @@
 import { useState, useEffect } from "react";
 //import { fetchEmployees, createEmployee } from '../functions/EmployeeFunctions.js'
+import AddEmployee from "./AddEmployee";
 import { supabase } from "../src/client";
 import EmployeeListing from "./EmployeeListing";
 
 const EmployeeWrapper = ({ inputHandler, totalTips }) => {
-
-  // Single Employee to add to / remove from Supabase
-  const [employee, setEmployee] = useState({ employee_name: "" });
-  const { employee_name } = employee;
 
   // Session Info
   const [employeeSessionData, setEmployeeSessionData] = useState({
     totalHours: 0,
     employeeData: null,
   });
+
+  inputHandler()
+
   const handleOnChange = (employeeHours, employeeId) => {
     let tempEmployeeData = { ...employeeSessionData };
     let index = tempEmployeeData.employeeData.findIndex(
@@ -66,12 +66,6 @@ const EmployeeWrapper = ({ inputHandler, totalTips }) => {
       };
     });
 
-  async function createEmployee() {
-    await supabase.from("employees").insert([{ employee_name }]).single();
-    setEmployee({ employee_name: "" });
-    fetchEmployees();
-  }
-
   return (
     <div className="w-1/2">
       <h2 className="text-white py-2 text-xl font-bold border-b-2 border-[#24506c] mb-8">
@@ -94,33 +88,18 @@ const EmployeeWrapper = ({ inputHandler, totalTips }) => {
         <EmployeeListing
           employeeData={employeeSessionData.employeeData}
           handleOnChange={handleOnChange}
+		  fetchEmployees={fetchEmployees}
         />
       </div>
 
-      <div className="addEmployee mt-12">
-        <input
-          className="bg-inputbg mr-4 text-white font-bold p-2 placeholder-darkgreen border-emerald-300 border-b-2 focus:outline-none focus:ring focus:ring-emerald-300/75"
-          placeholder="New Employee"
-          value={employee_name}
-          onChange={(e) =>
-            setEmployee({ ...employee, employee_name: e.target.value })
-          }
-        />
+      <AddEmployee fetchEmployees={fetchEmployees}/>
 
-        <button
-          className="bg-[#118593] py-2 px-4 text-white font-bold uppercase transition-all duration-300 hover:bg-[#176f79]"
-          onClick={createEmployee}
-        >
-          Add Employee
-        </button>
-      </div>
-
-      <button
+      {/* <button
         className="bg-[#118593] py-2 px-4 text-white font-bold uppercase transition-all duration-300 hover:bg-[#176f79]"
         onClick={logEmployeeData}
       >
         Show Log
-      </button>
+      </button> */}
     </div>
   );
 };

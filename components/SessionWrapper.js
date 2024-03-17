@@ -10,7 +10,6 @@ const SessionWrapper = ({}) => {
   });
 
   const [employeeInfo, setEmployeeInfo] = useState([]);
-  const { employee_name, employee_hours, employee_tips } = employeeInfo;
 
   const updateSession = (sessionInfo) => {
     setSession(sessionInfo);
@@ -22,10 +21,18 @@ const SessionWrapper = ({}) => {
   };
 
   async function saveSession() {
-    await supabase
+    const { data, error } = await supabase
       .from("sessions")
       .insert({ session_name: session.session_name, session_total_tips: session.session_total_tips })
+
+	if (error) {
+		console.log(error)
+	}
+	if (data) {
+		console.log("session data written to supa", data)
+	}
     setSession({ session_name: "", session_total_tips: "" });
+	console.log("employeeInfo is", employeeInfo);
     processEmployeeData([12, 15, 22]);
   }
 

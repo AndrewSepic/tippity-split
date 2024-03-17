@@ -1,19 +1,5 @@
 import "../styles/App.css";
-import Nav from "../components/Nav";
-import ContentLayout from "../components/ContentLayout";
-import SessionWrapper from "../components/SessionWrapper";
-import { useState, useEffect } from "react";
 
-function App() {
-  return (
-    <div>
-      <Nav></Nav>
-
-      <ContentLayout>
-        <SessionWrapper />
-      </ContentLayout>
-    </div>
-  );
+export default function MyApp({ Component, pageProps }) {
+  return <Component {...pageProps} />
 }
-
-export default App;
