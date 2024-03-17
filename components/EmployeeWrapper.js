@@ -4,15 +4,7 @@ import AddEmployee from "./AddEmployee";
 import { supabase } from "../src/client";
 import EmployeeListing from "./EmployeeListing";
 
-const EmployeeWrapper = ({ inputHandler, totalTips }) => {
-
-  // Session Info
-  const [employeeSessionData, setEmployeeSessionData] = useState({
-    totalHours: 0,
-    employeeData: null,
-  });
-
-  inputHandler()
+const EmployeeWrapper = ({ employeeSessionData, setEmployeeSessionData, totalTips }) => {
 
   const handleOnChange = (employeeHours, employeeId) => {
     let tempEmployeeData = { ...employeeSessionData };
@@ -55,7 +47,6 @@ const EmployeeWrapper = ({ inputHandler, totalTips }) => {
     setEmployeeSessionData({ ...employeeSessionData, employeeData: newData });
   }
 
-  // Implicit return using parentheses
   const streamLinedData = (employeeData) =>
     employeeData.map((employee) => {
       return {
