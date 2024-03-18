@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-//import { fetchEmployees, createEmployee } from '../functions/EmployeeFunctions.js'
+import { useEffect } from "react";
 import AddEmployee from "./AddEmployee";
 import { supabase } from "../src/client";
 import EmployeeListing from "./EmployeeListing";
+import { streamLinedData } from "./utils/utils"
 
 const EmployeeWrapper = ({ employeeSessionData, setEmployeeSessionData, totalTips }) => {
 
@@ -36,26 +36,24 @@ const EmployeeWrapper = ({ employeeSessionData, setEmployeeSessionData, totalTip
   // Fetch's Employees & sets employeeSessionData & employees
   useEffect(() => {
     fetchEmployees();
-  }, []);
+	console.log("runs");
+  },[]);
 
   async function fetchEmployees() {
-    const { data } = await supabase
+
+    const { data, error } = await supabase
       .from("employees")
       .select()
       .eq("is_active", true);
-    const newData = streamLinedData(data);
-    setEmployeeSessionData({ ...employeeSessionData, employeeData: newData });
-  }
 
-  const streamLinedData = (employeeData) =>
-    employeeData.map((employee) => {
-      return {
-        name: employee.employee_name,
-        id: employee.id,
-        hours: 0,
-        tips: 0,
-      };
-    });
+	if (data) {
+		const newData = streamLinedData(data);
+		setEmployeeSessionData({ ...employeeSessionData, employeeData: newData });
+	}
+	if (error) {
+		console.error(error);
+	}
+  }
 
   return (
     <div className="w-1/2">

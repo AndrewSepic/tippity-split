@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "../src/client";
 import EmployeeWrapper from "./EmployeeWrapper";
 import SessionInfo from "./SessionInfo";
+import { streamLinedData } from './utils/utils.js'
 
 const SessionWrapper = ({}) => {
 
@@ -30,9 +31,13 @@ const SessionWrapper = ({}) => {
 	if (data) {
 		console.log("session data written to supa", data)
 	}
-    setSession({ session_name: "", session_total_tips: "" });
-	
 	writeEmployeeData(data[0].id, employeeSessionData)
+	
+	// Reset state after Save
+    setSession({ session_name: "", session_total_tips: "" });
+	console.log("empSeshData", employeeSessionData.employeeData);
+	// const resetEmployees = streamLinedData(employeeSessionData.employeeData)
+	// setEmployeeSessionData({totalHours: 0, employeeData: resetEmployees});
   }
 
   async function writeEmployeeData(sessionId, employeeSessionData) {
