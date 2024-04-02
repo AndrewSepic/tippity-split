@@ -1,48 +1,48 @@
 {
-  "name": "supabase-react",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "lint": "next lint",
-    "format": "prettier --write .",
-    "start": "next start"
-  },
-  "dependencies": {
-    "@supabase/supabase-js": "^1.35.4",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^13.5.0",
-    "next": "^13.0.6",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-icons": "^5.0.1",
-    "swr": "^2.1.1",
-    "web-vitals": "^2.1.4"
-  },
-  "eslintConfig": {
-    "extends": "next/core-web-vitals"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "proxy": "http://localhost:8080",
-  "devDependencies": {
-    "autoprefixer": "^10.4.13",
-    "eslint": "^8.57.0",
-    "eslint-plugin-next": "^0.0.0",
-    "postcss": "^8.4.20",
-    "prettier": "3.2.5",
-    "tailwindcss": "^3.2.4"
-  }
+    "name": "supabase-react",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "lint": "next lint",
+        "format": "prettier --write .",
+        "start": "next start"
+    },
+    "dependencies": {
+        "@supabase/supabase-js": "^2.41.1",
+        "@testing-library/jest-dom": "^5.16.4",
+        "@testing-library/react": "^13.3.0",
+        "@testing-library/user-event": "^13.5.0",
+        "next": "^13.0.6",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-icons": "^5.0.1",
+        "swr": "^2.1.1",
+        "web-vitals": "^2.1.4"
+    },
+    "eslintConfig": {
+        "extends": "next/core-web-vitals"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "proxy": "http://localhost:8080",
+    "devDependencies": {
+        "autoprefixer": "^10.4.13",
+        "eslint": "^8.57.0",
+        "eslint-plugin-next": "^0.0.0",
+        "postcss": "^8.4.20",
+        "prettier": "3.2.5",
+        "tailwindcss": "^3.2.4"
+    }
 }
