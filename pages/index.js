@@ -1,63 +1,62 @@
+'use client'
 import React, { useEffect, useState } from 'react'
 import Nav from '../components/Nav'
 import ContentLayout from '../components/ContentLayout'
 import SessionWrapper from '../components/SessionWrapper'
 import { supabase, getUser } from '../src/client'
 import Login from '../components/Login'
+import { useSessionContext } from '../pages/Context/store';
+
 
 function App() {
 
-	const [isLoggedIn, setIsLoggedIn] = useState(false)
-	const [ user, setUser ] = useState({})
+	const { setUser, setSession } = useSessionContext();
+	const [ isLoggedIn, setIsLoggedIn] = useState(false)
 
-	async function getUser() {
-		const { data: { user } } = await supabase.auth.getUser()
-
-		return user;
-	}
 	useEffect(()=> {
-		const { data } = supabase.auth.onAuthStateChange((event, session) => {
-			console.log(event, session)
-		  
-			if (event === 'INITIAL_SESSION') {
-			  // handle initial session
-			  console.log("Initial session started");
-			  if( session !== null) {
-				  setIsLoggedIn(true);
-				  const activeUser = getUser();			  			
-				  console.log("user is", activeUser);
-				  setUser(activeUser);
-			  }
-			} else if (event === 'SIGNED_IN') {
-			  // handle sign in event
-			  console.log("signed In");
-			} else if (event === 'SIGNED_OUT') {
-			  // handle sign out event
-			  console.log("Signed Out Event");
-			  setUser(null);
-			  setIsLoggedIn(false);
-			} else if (event === 'PASSWORD_RECOVERY') {
-			  // handle password recovery event
-			} else if (event === 'TOKEN_REFRESHED') {
-			  // handle token refreshed event
-			} else if (event === 'USER_UPDATED') {
-			  // handle user updated event
+		const subscription = supabase.auth.onAuthStateChange(
+			(event, activeSession) => {
+				if (event === 'INITIAL_SESSION') {
+					// handle initial session
+					console.log("Initial session started");
+					if( activeSession !== null) {
+						setSession(activeSession)
+						setUser(activeSession.user)
+						setIsLoggedIn(true)
+						// console.log("session is", activeSession)
+					}
+				} 
+				else if (event === 'SIGNED_OUT') {
+					console.log("Signing Out")
+					setSession(null)
+					setUser(null)
+					setIsLoggedIn(false)
+				} else if (event === 'SIGNED_IN') {
+					console.log("Signing In")
+					// console.log("session is", activeSession)
+					setUser(activeSession.user)
+					setSession(activeSession)
+					setIsLoggedIn(true)
+				} else if (activeSession) {
+					console.log("else runs")
+					setSession(activeSession)
+				}
+			})
+		
+			return () => {
+				subscription.unsubscribe()
 			}
-		    // call unsubscribe to remove the callback
-  			data.subscription.unsubscribe()
-		  })  
-
 	},[])
 
     return (
-        <div className="min-h-full">
-            {isLoggedIn && <Nav user={user} />}
+		<div className="min-h-full">
+			{isLoggedIn && <Nav />}
 
-            <ContentLayout>
-                {isLoggedIn ? <SessionWrapper /> : <Login setIsLoggedIn={setIsLoggedIn} setUser={setUser} />}
-            </ContentLayout>
-        </div>
-    )
+			<ContentLayout>
+				{isLoggedIn ? <SessionWrapper /> : <Login setIsLoggedIn={setIsLoggedIn} />}
+			</ContentLayout>
+		</div>
+)
 }
 
 export default App

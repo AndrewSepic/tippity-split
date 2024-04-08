@@ -1,10 +1,13 @@
-import React from 'react';
+'use client'
+import React, {useEffect, useState } from 'react';
 import { supabase } from '../src/client'
+import { useSessionContext } from '../pages/Context/store';
 
-const Nav = ({user}) => {
+const Nav = () => {
 
+	const { user } = useSessionContext();
+	
 	const handleSignOut = async () => {
-		console.log("clicked")
 		const { error } = await supabase.auth.signOut()
 		if (error) {
 			console.log("Failed to Signout.", error)
@@ -22,7 +25,9 @@ const Nav = ({user}) => {
             </div>
 			<div>
 				<span>
-					Hi {user.user_metadata?.name}!
+					Hi { user ? 
+						user.user_metadata.name :
+						'Friend' }!
 				</span>
 				<a 
 					href="#"
@@ -35,4 +40,4 @@ const Nav = ({user}) => {
     )
 }
 
-export default Nav
+export default Nav;

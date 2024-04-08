@@ -18,8 +18,6 @@ const Login = ({setIsLoggedIn}) => {
     }
 
     async function handleSignUp() {
-		console.log("data sent in signup", userState);
-
 		const { data, user, error, session } = await supabase.auth.signUp({
 			email: userState.email,
 			password: userState.password,
@@ -51,7 +49,6 @@ const Login = ({setIsLoggedIn}) => {
 		}
 		if (data.session || data.user ) {
 			setIsLoggedIn(true);
-			console.log("data", data);
 		}
     }
 
@@ -112,11 +109,13 @@ const Login = ({setIsLoggedIn}) => {
                         type="email"
                         className="bg-inputbg mb-4 w-full text-white p-2 rounded placeholder-darkgreen border-emerald-300 border-b-2 focus:outline-none focus:ring focus:ring-emerald-300/75"
                         placeholder="Email"
+						onChange={(e) => handleInputChange(e, "email")}
                     ></input>
                     <input
-                        type="passoword"
+                        type="password"
                         placeholder="Password"
                         className="bg-inputbg mb-4 w-full text-white p-2 rounded placeholder-darkgreen border-emerald-300 border-b-2 focus:outline-none focus:ring focus:ring-emerald-300/75"
+						onChange={(e) => handleInputChange(e, "password")}
                     ></input>
                     <button
                         className="bg-buttonbg mb-4 w-full py-2 px-8 text-white rounded font-bold uppercase transition-all duration-300 hover:bg-[#176f79]"

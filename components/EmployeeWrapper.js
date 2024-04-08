@@ -42,7 +42,6 @@ const EmployeeWrapper = ({
     // Fetch's Employees & sets employeeSessionData & employees
     useEffect(() => {
         fetchEmployees()
-        console.log('runs')
     }, [])
 
     async function fetchEmployees() {
