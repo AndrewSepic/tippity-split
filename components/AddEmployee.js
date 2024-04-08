@@ -1,18 +1,19 @@
 import React, { useState } from 'react'
 import { supabase } from '../src/client'
-import { useSessionContext } from '../pages/Context/store'
+import { useSessionContext } from '../Context/store'
 
 const AddEmployee = ({ fetchEmployees }) => {
     // Single Employee to add to / remove from Supabase
-	const { user } = useSessionContext();
-	const userId = user.id;
+    const { user } = useSessionContext()
+    const userId = user.id
     const [employee, setEmployee] = useState({ employee_name: '' })
     const { employee_name } = employee
 
     async function createEmployee() {
         await supabase
-			.from('employees')
-			.insert([{ employee_name, is_active: 'true', user_id: userId }]).single()
+            .from('employees')
+            .insert([{ employee_name, is_active: 'true', user_id: userId }])
+            .single()
         setEmployee({ employee_name: '' })
         fetchEmployees()
     }

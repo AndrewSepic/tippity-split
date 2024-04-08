@@ -5,20 +5,20 @@ import SessionInfo from './SessionInfo'
 import { streamLinedData } from './utils/utils.js'
 import PastSessions from './PastSessions.js'
 import SessionView from './SessionView.js'
-import { useSessionContext } from '../pages/Context/store.js'
+import { useSessionContext } from '../Context/store.js'
 
 const SessionWrapper = ({}) => {
     const [session, setSession] = useState({
         session_name: '',
         session_total_tips: '',
-		session_notes: ''
+        session_notes: '',
     })
 
-	const { user } = useSessionContext();
-	const userId = user.id;
+    const { user } = useSessionContext()
+    const userId = user.id
     const [isSessionView, setIsSessionView] = useState(false)
     const [clickedSession, setClickedSession] = useState(null)
-	const [employeeSessionData, setEmployeeSessionData] = useState({
+    const [employeeSessionData, setEmployeeSessionData] = useState({
         totalHours: 0,
         employeeData: null,
     })
@@ -34,26 +34,31 @@ const SessionWrapper = ({}) => {
 
     async function saveSession() {
         const { data, error } = await supabase
-			.from('sessions')
-			.insert({
-				session_name: session.session_name,
-				session_total_tips: session.session_total_tips,
-				session_notes: session.session_notes,
-				user_id: userId
-			})
-			.select()
+            .from('sessions')
+            .insert({
+                session_name: session.session_name,
+                session_total_tips: session.session_total_tips,
+                session_notes: session.session_notes,
+                user_id: userId,
+            })
+            .select()
 
         if (error) {
             console.log(error)
         }
         if (data) {
             console.log('session data written to supa', data)
-			writeEmployeeData(data[0].id, employeeSessionData)
-			// Reset state after Save
-			setSession({ session_name: '', session_total_tips: '' })
-			console.log('empSeshData', employeeSessionData.employeeData)
-			const resetEmployees = streamLinedData(employeeSessionData.employeeData)
-			setEmployeeSessionData({ totalHours: 0, employeeData: resetEmployees })
+            writeEmployeeData(data[0].id, employeeSessionData)
+            // Reset state after Save
+            setSession({ session_name: '', session_total_tips: '' })
+            console.log('empSeshData', employeeSessionData.employeeData)
+            const resetEmployees = streamLinedData(
+                employeeSessionData.employeeData
+            )
+            setEmployeeSessionData({
+                totalHours: 0,
+                employeeData: resetEmployees,
+            })
         }
     }
 
@@ -68,10 +73,11 @@ const SessionWrapper = ({}) => {
                         employee_id: employee.id,
                         employee_hours: employee.hours,
                         employee_tips: employee.tips,
-						user_id: userId
+                        user_id: userId,
                     }
                 })
-            ).select()
+            )
+            .select()
 
         if (error) {
             console.log(error)

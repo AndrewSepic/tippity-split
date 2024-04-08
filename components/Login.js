@@ -1,42 +1,42 @@
 import React, { useState, useEffect } from 'react'
 import { supabase } from '../src/client'
 
-const Login = ({setIsLoggedIn}) => {
+const Login = ({ setIsLoggedIn }) => {
     const [isNewUser, setIsNewUser] = useState(false)
-	const [userState, setUserState] = useState([]);
+    const [userState, setUserState] = useState([])
 
-	const handleInputChange = (e, fieldName) => {
-		const value = e.target.value;
-		setUserState((prevState) => ({
-			...prevState,
-			[fieldName]: value
-		}))
-	}
+    const handleInputChange = (e, fieldName) => {
+        const value = e.target.value
+        setUserState((prevState) => ({
+            ...prevState,
+            [fieldName]: value,
+        }))
+    }
 
     const handleNewUser = () => {
         setIsNewUser((prevState) => !prevState)
     }
 
     async function handleSignUp() {
-		const { data, user, error, session } = await supabase.auth.signUp({
-			email: userState.email,
-			password: userState.password,
-			options: {
-				data: {
-				  name: userState.name,
-				  company: userState.company,
-				}
-			  }
-		  })
-		if (error) {
-			console.log("FAIL!", error)
-		}
-		if (data) {
-			setIsLoggedIn(true);
-			// console.log("user", user);
-			// console.log("session:", session);
-			console.log('data is', data);
-		}
+        const { data, user, error, session } = await supabase.auth.signUp({
+            email: userState.email,
+            password: userState.password,
+            options: {
+                data: {
+                    name: userState.name,
+                    company: userState.company,
+                },
+            },
+        })
+        if (error) {
+            console.log('FAIL!', error)
+        }
+        if (data) {
+            setIsLoggedIn(true)
+            // console.log("user", user);
+            // console.log("session:", session);
+            console.log('data is', data)
+        }
     }
 
     const handleSignIn = async () => {
@@ -44,12 +44,12 @@ const Login = ({setIsLoggedIn}) => {
             email: userState.email,
             password: userState.password,
         })
-		if (error) {
-			console.log("FAIL!", error)
-		}
-		if (data.session || data.user ) {
-			setIsLoggedIn(true);
-		}
+        if (error) {
+            console.log('FAIL!', error)
+        }
+        if (data.session || data.user) {
+            setIsLoggedIn(true)
+        }
     }
 
     return (
@@ -66,25 +66,25 @@ const Login = ({setIsLoggedIn}) => {
                         type="text"
                         className="bg-inputbg mb-4 w-full text-white p-2 rounded placeholder-darkgreen border-emerald-300 border-b-2 focus:outline-none focus:ring focus:ring-emerald-300/75"
                         placeholder="Name"
-						onChange={(e) => handleInputChange(e, "name")}
+                        onChange={(e) => handleInputChange(e, 'name')}
                     ></input>
                     <input
                         type="text"
                         className="bg-inputbg mb-4 w-full text-white p-2 rounded placeholder-darkgreen border-emerald-300 border-b-2 focus:outline-none focus:ring focus:ring-emerald-300/75"
                         placeholder="Company (Optional)"
-						onChange={(e) => handleInputChange(e, "company")}
+                        onChange={(e) => handleInputChange(e, 'company')}
                     ></input>
                     <input
                         type="email"
                         className="bg-inputbg mb-4 w-full text-white p-2 rounded placeholder-darkgreen border-emerald-300 border-b-2 focus:outline-none focus:ring focus:ring-emerald-300/75"
                         placeholder="Email"
-						onChange={(e) => handleInputChange(e, "email")}
+                        onChange={(e) => handleInputChange(e, 'email')}
                     ></input>
                     <input
                         type="passoword"
                         placeholder="Password"
                         className="bg-inputbg mb-4 w-full text-white p-2 rounded placeholder-darkgreen border-emerald-300 border-b-2 focus:outline-none focus:ring focus:ring-emerald-300/75"
-						onChange={(e) => handleInputChange(e, "password")}
+                        onChange={(e) => handleInputChange(e, 'password')}
                     ></input>
                     <button
                         className="bg-buttonbg mb-4 w-full py-2 px-8 text-white rounded font-bold uppercase transition-all duration-300 hover:bg-[#176f79]"
@@ -109,13 +109,13 @@ const Login = ({setIsLoggedIn}) => {
                         type="email"
                         className="bg-inputbg mb-4 w-full text-white p-2 rounded placeholder-darkgreen border-emerald-300 border-b-2 focus:outline-none focus:ring focus:ring-emerald-300/75"
                         placeholder="Email"
-						onChange={(e) => handleInputChange(e, "email")}
+                        onChange={(e) => handleInputChange(e, 'email')}
                     ></input>
                     <input
                         type="password"
                         placeholder="Password"
                         className="bg-inputbg mb-4 w-full text-white p-2 rounded placeholder-darkgreen border-emerald-300 border-b-2 focus:outline-none focus:ring focus:ring-emerald-300/75"
-						onChange={(e) => handleInputChange(e, "password")}
+                        onChange={(e) => handleInputChange(e, 'password')}
                     ></input>
                     <button
                         className="bg-buttonbg mb-4 w-full py-2 px-8 text-white rounded font-bold uppercase transition-all duration-300 hover:bg-[#176f79]"
