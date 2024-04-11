@@ -6,6 +6,7 @@ import SessionWrapper from '../components/SessionWrapper'
 import { supabase, getUser } from '../src/client'
 import Login from '../components/Login'
 import { useSessionContext } from '../Context/store'
+import toast, { Toaster } from 'react-hot-toast';
 
 function App() {
     const { setUser, setSession } = useSessionContext()
@@ -48,6 +49,7 @@ function App() {
 
     return (
         <div className="min-h-full">
+			<Toaster />
             {isLoggedIn && <Nav />}
 
             <ContentLayout>

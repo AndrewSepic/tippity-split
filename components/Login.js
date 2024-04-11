@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { supabase } from '../src/client'
+import toast from 'react-hot-toast'
 
 const Login = ({ setIsLoggedIn }) => {
     const [isNewUser, setIsNewUser] = useState(false)
@@ -29,7 +30,8 @@ const Login = ({ setIsLoggedIn }) => {
             },
         })
         if (error) {
-            console.log('FAIL!', error)
+            console.log('fail:', error)
+			toast.error('Error: We encountered a problem signing you up. Please contact support.')
         }
         if (data) {
             setIsLoggedIn(true)
@@ -45,7 +47,8 @@ const Login = ({ setIsLoggedIn }) => {
             password: userState.password,
         })
         if (error) {
-            console.log('FAIL!', error)
+            console.log('fail:', error)
+			toast.error("Error: Incorrect password or username. Dummy.")
         }
         if (data.session || data.user) {
             setIsLoggedIn(true)
