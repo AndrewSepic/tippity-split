@@ -34,6 +34,7 @@ const Login = ({ setIsLoggedIn }) => {
 			toast.error('Error: We encountered a problem signing you up. Please contact support.')
         }
         if (data) {
+			toast.success('Success! Account created.')
             setIsLoggedIn(true)
             // console.log("user", user);
             // console.log("session:", session);
@@ -51,6 +52,7 @@ const Login = ({ setIsLoggedIn }) => {
 			toast.error("Error: Incorrect password or username. Dummy.")
         }
         if (data.session || data.user) {
+			toast.success('Success!  Logging in..')
             setIsLoggedIn(true)
         }
     }

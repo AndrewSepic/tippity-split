@@ -9,7 +9,7 @@ const SessionInfo = ({ inputHandler, sessionInfo }) => {
                 </h2>
                 <input
                     size="50"
-                    className="bg-inputbg mr-4 text-white font-bold p-2 placeholder-darkgreen border-emerald-300 border-b-2 focus:outline-none focus:ring focus:ring-emerald-300/75"
+                    className="bg-inputbg mr-4 rounded text-white font-bold p-2 placeholder-darkgreen border-emerald-300 border-b-2 focus:outline-none focus:ring focus:ring-emerald-300/75"
                     placeholder="Put a name or Pay period here"
                     value={session_name}
                     onChange={(e) =>
@@ -25,13 +25,16 @@ const SessionInfo = ({ inputHandler, sessionInfo }) => {
                 <h2 className="text-white py-2 text-xl font-bold">
                     Total Tips
                 </h2>
-                <span className="text-white py-2 text-xl font-bold">
-                    ${' '}
+                <div className="text-white py-2 text-xl font-bold">
+                   <span 
+				   	className="bg-[#4e6878] p-2 border b-1 border-black"> 
+				   		$
+				   	</span>
                     <input
                         size="6"
                         type="number"
                         step="0.01"
-                        className="bg-inputbg mr-4 text-white font-bold p-2 placeholder-darkgreen border-emerald-300 border-b-2 focus:outline-none focus:ring focus:ring-emerald-300/75"
+                        className="bg-inputbg rounded mr-4 text-white font-bold p-2 placeholder-darkgreen border-emerald-300 border-b-2 focus:outline-none focus:ring focus:ring-emerald-300/75"
                         placeholder="0.00"
                         value={session_total_tips}
                         onChange={(e) =>
@@ -41,7 +44,7 @@ const SessionInfo = ({ inputHandler, sessionInfo }) => {
                             })
                         }
                     ></input>
-                </span>
+                </div>
             </div>
 
             <div className="block mt-8">
@@ -49,7 +52,7 @@ const SessionInfo = ({ inputHandler, sessionInfo }) => {
 
                 <textarea
                     size="6"
-                    className="w-full bg-inputbg mr-4 text-white font-bold p-2 placeholder-darkgreen border-emerald-300 border-b-2 focus:outline-none focus:ring focus:ring-emerald-300/75"
+                    className="w-full bg-inputbg mr-4 rounded text-white font-bold p-2 placeholder-darkgreen border-emerald-300 border-b-2 focus:outline-none focus:ring focus:ring-emerald-300/75"
                     placeholder="Add notes for later reference. (optional)"
                     value={session_notes}
                     onChange={(e) =>

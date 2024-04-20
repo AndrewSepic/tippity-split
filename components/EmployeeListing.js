@@ -32,7 +32,7 @@ const EmployeeListing = ({ employeeData, handleOnChange, fetchEmployees }) => {
                         </h3>
                         <input
                             size="6"
-                            className="bg-inputbg mr-4 text-white font-bold p-2 placeholder-darkgreen border-emerald-300 border-b-2 focus:outline-none focus:ring focus:ring-emerald-300/75"
+                            className="bg-inputbg rounded mr-4 text-white font-bold p-2 placeholder-darkgreen border-emerald-300 border-b-2 focus:outline-none focus:ring focus:ring-emerald-300/75"
                             placeholder="Hours"
                             onChange={(e) => {
                                 handleOnChange(

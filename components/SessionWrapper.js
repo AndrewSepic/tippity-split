@@ -44,6 +44,7 @@ const SessionWrapper = ({}) => {
             .select()
 
         if (error) {
+			toast.error('Error: There was a problem saving your session.')
             console.log(error)
         }
         if (data) {
@@ -83,6 +84,7 @@ const SessionWrapper = ({}) => {
             console.log(error)
         }
         if (data) {
+			toast.success('Session saved! ')
             console.log('employee data written to supa', data)
         }
     }
@@ -115,7 +117,7 @@ const SessionWrapper = ({}) => {
 
                     <div className="block w-full my-12pt-6">
                         <button
-                            className="bg-[#118593] py-2 px-8 text-white font-bold uppercase transition-all duration-300 hover:bg-[#176f79]"
+                            className="bg-[#118593] py-2 px-8 rounded text-white font-bold uppercase transition-all duration-300 hover:bg-[#176f79]"
                             onClick={saveSession}
                         >
                             Save Session
