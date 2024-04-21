@@ -7,6 +7,7 @@ import { supabase, getUser } from '../src/client'
 import Login from '../components/Login'
 import { useSessionContext } from '../Context/store'
 import toast, { Toaster } from 'react-hot-toast';
+import Head from 'next/head';
 
 function App() {
     const { setUser, setSession } = useSessionContext()
@@ -48,18 +49,24 @@ function App() {
     }, [])
 
     return (
-        <div className="min-h-full">
-			<Toaster />
-            {isLoggedIn && <Nav />}
+		<>
+			<Head>
+				<title>Tippity Split: A proportional tip splitter for Cafe Owners, Bar Managers & Restaurants</title>
+				<meta name="description" content="Easily split pooled tips across employees or groups of employees based on hours or percentages." />
+			</Head>
+			<div className="min-h-full">
+				<Toaster />
+				{isLoggedIn && <Nav />}
 
-            <ContentLayout>
-                {isLoggedIn ? (
-                    <SessionWrapper />
-                ) : (
-                    <Login setIsLoggedIn={setIsLoggedIn} />
-                )}
-            </ContentLayout>
-        </div>
+				<ContentLayout>
+					{isLoggedIn ? (
+						<SessionWrapper />
+					) : (
+						<Login setIsLoggedIn={setIsLoggedIn} />
+					)}
+				</ContentLayout>
+			</div>
+		</>
     )
 }
 

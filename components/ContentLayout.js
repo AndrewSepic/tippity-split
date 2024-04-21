@@ -1,6 +1,6 @@
 const ContentLayout = ({ children }) => {
     return (
-        <div className="flex bg-darkgreen p-8 h-full min-h-full items-center justify-center">
+        <div className="content-layout flex flex-col bg-darkgreen px-8 pt-8 justify-between">
             {children}
         </div>
     )

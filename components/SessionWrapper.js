@@ -6,6 +6,8 @@ import { streamLinedData } from './utils/utils.js'
 import PastSessions from './PastSessions.js'
 import SessionView from './SessionView.js'
 import { useSessionContext } from '../Context/store.js'
+import toast from 'react-hot-toast';
+
 
 const SessionWrapper = ({}) => {
     const [session, setSession] = useState({
@@ -90,44 +92,45 @@ const SessionWrapper = ({}) => {
     }
 
     return (
-        <div className="w-full">
-            {isSessionView && (
-                <>
-                    <SessionView
-                        session={clickedSession}
-                        closeSession={toggleSessionView}
-                    />
-                </>
-            )}
+		<>
+			<div className="w-full">
+				{isSessionView && (
+					<>
+						<SessionView
+							session={clickedSession}
+							closeSession={toggleSessionView}
+						/>
+					</>
+				)}
 
-            {!isSessionView && (
-                <>
-                    <div className="flex justify-between">
-                        <SessionInfo
-                            inputHandler={updateSession}
-                            sessionInfo={session}
-                        />
+				{!isSessionView && (
+					<>
+						<div className="flex justify-between">
+							<SessionInfo
+								inputHandler={updateSession}
+								sessionInfo={session}
+							/>
 
-                        <EmployeeWrapper
-                            employeeSessionData={employeeSessionData}
-                            setEmployeeSessionData={setEmployeeSessionData}
-                            totalTips={session.session_total_tips}
-                        />
-                    </div>
+							<EmployeeWrapper
+								employeeSessionData={employeeSessionData}
+								setEmployeeSessionData={setEmployeeSessionData}
+								totalTips={session.session_total_tips}
+							/>
+						</div>
 
-                    <div className="block w-full my-12pt-6">
-                        <button
-                            className="bg-[#118593] py-2 px-8 rounded text-white font-bold uppercase transition-all duration-300 hover:bg-[#176f79]"
-                            onClick={saveSession}
-                        >
-                            Save Session
-                        </button>
-                    </div>
-                </>
-            )}
-
-            <PastSessions sessionViewHandler={toggleSessionView} />
-        </div>
+						<div className="block w-full my-12pt-6">
+							<button
+								className="bg-[#118593] py-2 px-8 rounded text-white font-bold uppercase transition-all duration-300 hover:bg-[#176f79]"
+								onClick={saveSession}
+							>
+								Save Session
+							</button>
+						</div>
+					</>
+				)}
+			</div>
+			<PastSessions sessionViewHandler={toggleSessionView} />
+		</>
     )
 }
 

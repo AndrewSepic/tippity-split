@@ -21,7 +21,7 @@ const AddEmployee = ({ fetchEmployees }) => {
     return (
         <div className="addEmployee mt-12">
             <input
-                className="bg-inputbg mr-4 text-white font-bold p-2 placeholder-darkgreen border-emerald-300 border-b-2 focus:outline-none focus:ring focus:ring-emerald-300/75"
+                className="bg-inputbg mr-4 rounded text-white font-bold p-2 placeholder-darkgreen border-emerald-300 border-b-2 focus:outline-none focus:ring focus:ring-emerald-300/75"
                 placeholder="New Employee"
                 value={employee_name}
                 onChange={(e) =>
@@ -30,7 +30,7 @@ const AddEmployee = ({ fetchEmployees }) => {
             />
 
             <button
-                className="bg-[#118593] py-2 px-4 text-white font-bold uppercase transition-all duration-300 hover:bg-[#176f79]"
+                className="bg-[#118593] py-2 px-4 rounded text-white font-bold uppercase transition-all duration-300 hover:bg-[#176f79]"
                 onClick={createEmployee}
             >
                 Add Employee

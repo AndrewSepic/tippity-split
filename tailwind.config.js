@@ -16,6 +16,7 @@ module.exports = {
                 inputbg: '#24506c',
                 buttonbg: '#118593',
                 inputborderbottom: '#118593',
+				sessionText: '#588bac'
             },
         },
     },

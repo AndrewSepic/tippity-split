@@ -25,12 +25,12 @@ const PastSessions = ({ sessionViewHandler }) => {
                 Past Sessions
             </h2>
             {sessions && (
-                <div className="flex">
+                <div className="flex items-end h-32">
                     {sessions.map((session) => {
                         return (
                             <div
                                 key={session.id}
-                                className="w120 bg-[#edead1] transition p-4 mr-4 rounded-sm cursor-pointer hover:bg-[#d3cfaf]"
+                                className="w120 h-24 bg-[#edead1] transition-all p-4 mr-4 rounded-t cursor-pointer hover:bg-[#d3cfaf] hover:h-32"
                                 onClick={() => sessionViewHandler(session)}
                             >
                                 <h3>{session.session_name}</h3>

@@ -35,20 +35,28 @@ const SessionView = ({ session, closeSession }) => {
                 </button>
             </div>
             <div className="bg-[#edead1] p-8 rounded flex justify-between">
-                <div className="w-1/2 pb-8">
+                <div className="w-1/2 pb-8 pr-8">
                     <h2 className="text-darkgreen py-2 text-xl font-bold">
                         {session.session_name}
                     </h2>
-                    <h4 className="text-darkgreen font-bold">
-                        Total Tips:{' '}
-                        <span className="text-3xl text-[#588bac]">
-                            ${session.session_total_tips}
-                        </span>
-                    </h4>
+                    <h3 className="text-darkgreen font-bold text-lg mt-4">
+                        Total Tips:
+                    </h3>
+					<div className="text-3xl text-sessionText font-bold">
+						${session.session_total_tips}
+					</div>
+
+					<h3 className="text-darkgreen font-bold text-lg mt-4">
+                        Notes:
+                    </h3>
+					<div className="text-sessionText">
+                       {session.session_notes}
+					</div>
+                        
                 </div>
 
                 <div className="w-1/2">
-                    <h2 className="text-[#588bac] py-2 text-xl font-bold border-lightgreen border-b-2 border-dashed mb-8">
+                    <h2 className="text-sessionText py-2 text-xl font-bold border-lightgreen border-b-2 border-dashed mb-8">
                         Staff
                     </h2>
 
@@ -71,13 +79,13 @@ const SessionView = ({ session, closeSession }) => {
                                     key={employee.id}
                                     className="employee my-2 flex justify-start group items-center "
                                 >
-                                    <h3 className="text-[#588bac] py-2 w-[120px] font-bold border-lightgreen border-b-2 border-dashed">
+                                    <h3 className="text-sessionText py-2 w-[120px] font-bold border-lightgreen border-b-2 border-dashed">
                                         {employee.employee_name}
                                     </h3>
-                                    <div className="w-[120px] text-[#588bac] text-center px-2 placeholder-white py-2 border-lightgreen border-b-2 border-dashed font-bold">
+                                    <div className="w-[120px] text-sessionText text-center px-2 placeholder-white py-2 border-lightgreen border-b-2 border-dashed font-bold">
                                         {employee.employee_hours}
                                     </div>
-                                    <div className="w-[120px] text-[#588bac] text-right px-2 placeholder-white py-2 border-lightgreen border-b-2 border-dashed font-bold">
+                                    <div className="w-[120px] text-sessionText text-right px-2 placeholder-white py-2 border-lightgreen border-b-2 border-dashed font-bold">
                                         ${employee.employee_tips}
                                     </div>
                                 </div>

@@ -15,6 +15,10 @@ div#__next > div {
     height: 100%;
 }
 
+.content-layout {
+	min-height: calc(100vh - 81px);
+}
+
 .deleteEmployee {
     transition: all ease-in-out 0.2s;
     color: white;
@@ -26,3 +30,5 @@ div#__next > div {
     color: red;
     opacity: 1;
 }
+
+

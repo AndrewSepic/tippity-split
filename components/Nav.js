@@ -14,7 +14,7 @@ const Nav = () => {
     }
 
     return (
-        <div className="w-full bg-white p-8 flex justify-between">
+        <div className="w-full bg-white p-6 flex justify-between">
             <div className="">
                 <img
                     className="w-[200px]"
