@@ -58,7 +58,7 @@ function App() {
 				<Toaster />
 				{isLoggedIn && <Nav />}
 
-				<ContentLayout>
+				<ContentLayout isLoggedIn={isLoggedIn}>
 					{isLoggedIn ? (
 						<SessionWrapper />
 					) : (

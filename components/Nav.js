@@ -1,7 +1,8 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { supabase } from '../src/client'
 import { useSessionContext } from '../Context/store'
+import { FaSignOutAlt } from 'react-icons/fa'
 
 const Nav = () => {
     const { user } = useSessionContext()
@@ -22,14 +23,14 @@ const Nav = () => {
                     alt="Tippity Split"
                 />
             </div>
-            <div>
-                <span>Hi {user ? user.user_metadata.name : 'Friend'}!</span>
-                <a
-                    href="#"
+            <div className="flex items-center">
+                <span className="mr-4">Hi {user ? user.user_metadata.name : 'Friend'}!</span>
+                <a href="#"
                     onClick={handleSignOut}
-                    className="transition-all text-coinyellow hover:text-cashgreen ml-4"
+                    className="transition-all text-coinyellow hover:text-cashgreen ml-2 flex items-center"
                 >
                     Sign Out
+					<FaSignOutAlt className="ml-2"/>
                 </a>
             </div>
         </div>
