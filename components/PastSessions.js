@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { supabase } from '../src/client'
 
-const PastSessions = ({ sessionViewHandler }) => {
+const PastSessions = ({ sessionViewHandler, newSessionCreated }) => {
     const [sessions, setSessions] = useState()
 
     useEffect(() => {
         getSessions()
     }, [])
+
+	// Use effect to reload session when a new session has been saved
+	useEffect(() => {
+        getSessions()
+    }, [newSessionCreated])
 
     async function getSessions() {
         const { data, error } = await supabase.from('sessions').select('*')

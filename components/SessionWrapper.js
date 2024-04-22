@@ -16,6 +16,8 @@ const SessionWrapper = ({}) => {
         session_notes: '',
     })
 
+	const [ newSessions, setNewSessions ] = useState(0);
+
     const { user } = useSessionContext()
     const userId = user.id
     const [isSessionView, setIsSessionView] = useState(false)
@@ -52,16 +54,20 @@ const SessionWrapper = ({}) => {
         if (data) {
             console.log('session data written to supa', data)
             writeEmployeeData(data[0].id, employeeSessionData)
-            // Reset state after Save
-            setSession({ session_name: '', session_total_tips: '' })
-            console.log('empSeshData', employeeSessionData.employeeData)
+            
+			// Reset state after Save
+            setSession({ session_name: '', session_total_tips: '', session_notes: ''})
             const resetEmployees = streamLinedData(
                 employeeSessionData.employeeData
             )
+			// THis is returning undefined on all Names (removing names from employee listing) 
+			// & hours are 0 but aren't being rendered/updated in Employee listing.
+			console.log('reset is', resetEmployees)
             setEmployeeSessionData({
                 totalHours: 0,
                 employeeData: resetEmployees,
             })
+			setNewSessions(newSessions + 1)
         }
     }
 
@@ -86,8 +92,8 @@ const SessionWrapper = ({}) => {
             console.log(error)
         }
         if (data) {
-			toast.success('Session saved! ')
-            console.log('employee data written to supa', data)
+			toast.success('Session saved!')
+            // console.log('employee data written to supa', data)
         }
     }
 
@@ -129,7 +135,7 @@ const SessionWrapper = ({}) => {
 					</>
 				)}
 			</div>
-			<PastSessions sessionViewHandler={toggleSessionView} />
+			<PastSessions sessionViewHandler={toggleSessionView} newSessionCreated={newSessions} />
 		</>
     )
 }
