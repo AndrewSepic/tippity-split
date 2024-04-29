@@ -89,13 +89,13 @@ const EmployeeWrapper = ({
             </div>
 
             <AddEmployee fetchEmployees={fetchEmployees} />
-
+{/* 
             <button
                 className="bg-[#118593] py-2 px-4 text-white font-bold uppercase transition-all duration-300 hover:bg-[#176f79]"
                 onClick={logEmployeeData}
             >
                 Show Log
-            </button> 
+            </button>  */}
         </div>
     )
 }
