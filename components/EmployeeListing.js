@@ -28,12 +28,13 @@ const EmployeeListing = ({ employeeData, handleOnChange, fetchEmployees }) => {
                         className="employee my-2 flex justify-start group items-center"
                     >
                         <h3 className="text-white py-2 w-[120px] font-bold">
-                            {employee.name}
+                            {employee.employee_name}
                         </h3>
                         <input
                             size="6"
                             className="bg-inputbg rounded mr-4 text-white font-bold p-2 placeholder-darkgreen border-emerald-300 border-b-2 focus:outline-none focus:ring focus:ring-emerald-300/75"
                             placeholder="Hours"
+							value={employee.hours}
                             onChange={(e) => {
                                 handleOnChange(
                                     parseInt(e.target.value),
