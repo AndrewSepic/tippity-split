@@ -78,7 +78,7 @@ const SessionWrapper = ({}) => {
                 employeeSessionData.employeeData.map((employee) => {
                     return {
                         session_id: sessionId,
-                        employee_name: employee.name,
+                        employee_name: employee.employee_name,
                         employee_id: employee.id,
                         employee_hours: employee.hours,
                         employee_tips: employee.tips,

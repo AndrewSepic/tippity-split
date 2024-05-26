@@ -10,7 +10,6 @@ const EmployeeWrapper = ({
     totalTips,
 }) => {
     const handleOnChange = (employeeHours, employeeId) => {
-		console.log("inserted hours", employeeHours);
         let tempEmployeeData = { ...employeeSessionData }
         let index = tempEmployeeData.employeeData.findIndex(
             (i) => i.id == employeeId

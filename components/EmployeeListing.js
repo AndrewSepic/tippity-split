@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { FaMinusCircle } from 'react-icons/fa'
 import { supabase } from '../src/client'
 
