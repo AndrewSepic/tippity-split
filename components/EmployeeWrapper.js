@@ -10,20 +10,21 @@ const EmployeeWrapper = ({
     totalTips,
 }) => {
     const handleOnChange = (employeeHours, employeeId) => {
+		console.log("inserted hours", employeeHours);
         let tempEmployeeData = { ...employeeSessionData }
         let index = tempEmployeeData.employeeData.findIndex(
             (i) => i.id == employeeId
         )
         tempEmployeeData.employeeData[index].hours = employeeHours
         const totalHours = tempEmployeeData.employeeData.reduce(
-            (accumulator, currentValue) => accumulator + currentValue.hours,
+            (accumulator, currentValue) => accumulator + parseFloat(currentValue.hours),
             0
         )
 
         if (totalTips) {
             tempEmployeeData.employeeData.forEach((employee) => {
                 employee.tips = (
-                    (totalTips * employee.hours) /
+                    (totalTips * parseFloat(employee.hours)) /
                     totalHours
                 ).toFixed(2)
             })
