@@ -32,12 +32,13 @@ const EmployeeListing = ({ employeeData, handleOnChange, fetchEmployees }) => {
                         </h3>
                         <input
                             size="6"
+							type="text"
                             className="bg-inputbg rounded mr-4 text-white font-bold p-2 placeholder-darkgreen border-emerald-300 border-b-2 focus:outline-none focus:ring focus:ring-emerald-300/75"
                             placeholder="Hours"
 							value={employee.hours}
                             onChange={(e) => {
                                 handleOnChange(
-                                    parseInt(e.target.value),
+                                	e.target.value,
                                     employee.id
                                 )
                             }}
