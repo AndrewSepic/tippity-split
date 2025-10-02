@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+## Tippity Split - A proportional App Splitter for  Cafes, Bars and Restaurants
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<img width="790" height="599" alt="Screenshot 2025-10-02 at 1 47 14 PM" src="https://github.com/user-attachments/assets/062ffc1b-03ab-4a31-b420-767c70bd92b5" />
 
 ## Available Scripts
 
